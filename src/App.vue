@@ -27,7 +27,7 @@ export default {
 
 <style>
 #app {
-  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Helvetica Neue,Helvetica,Arial,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,PingFang SC,Source Han Sans CN,sans-seriff;
+  font-family:'Microsoft YaHei' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -84,9 +84,6 @@ export default {
 }
 li{
   list-style: none;
-}
-thead{
-  display: none
 }
 
 </style>

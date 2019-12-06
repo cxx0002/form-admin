@@ -98,23 +98,23 @@
     <div class="report">
       <div class="r1">
         <p class="report-name">总展现量</p>
-        <p class="report-value">407,216</p>
+        <p class="report-value">1,296,724</p>
       </div>
       <div class="r2">
         <p class="report-name">总点击量</p>
-        <p class="report-value">5,358</p>
+        <p class="report-value">20,202</p>
       </div>
       <div class="r3">
         <p class="report-name">总分成收入</p>
         <p class="report-value">
-          2,005.06
+         52,727.22
           <span>元</span>
         </p>
       </div>
       <div class="r3">
         <p class="report-name">总千次展示收益</p>
         <p class="report-value">
-          4.92
+           2.61
           <span>元</span>
         </p>
       </div>
@@ -127,7 +127,29 @@
       </div>
     </div>
     <div class="qushi">数据走势</div>
-    <div class="rect"></div>
+    <div class="rect" id="report"></div>
+    <div class="rectTitle">
+      <div>
+        <i class="glyphicon glyphicon-ok"></i>
+        <span>广告展示数</span>
+      </div>
+      <div>
+        <i class="glyphicon glyphicon-ok"></i>
+        <span>预计收益</span>
+      </div>
+      <div>
+        <i></i>
+        <span>点击量</span>
+      </div>
+      <div>
+        <i></i>
+        <span>千次展示收益</span>
+      </div>
+      <div>
+        <i></i>
+        <span>点击率</span>
+      </div>
+    </div>
     <table class="table">
       <caption class="qushi">数据报表</caption>
       <thead>
@@ -155,48 +177,35 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>2019-12-04</td>
+         <tr>
+          <td>2019-12-05</td>
           <td>
-            <p>快小说阅读器(iOS)</p>
-            <span>ID 1109594869</span>
+            <p>蓝奏云(H5)</p>
+            <span>ID 1110065650</span>
           </td>
 
           <td style="width:200px"></td>
-          <td>118,000</td>
-          <td>1,454</td>
-          <td>572.17 元</td>
-          <td>4.85 元</td>
-          <td>1.23%</td>
+          <td>1,296,724</td>
+          <td>20,202</td>
+          <td>52,727.22元</td>
+          <td> 2.61元</td>
+          <td>1.56%</td>
         </tr>
         <tr>
-          <td>2019-12-04</td>
+          <td>2019-12-05</td>
           <td>
-            <p>快小说阅读器(iOS)</p>
-            <span>ID 1109594869</span>
+            <p>蓝奏云(H5)</p>
+            <span>ID 1110065650</span>
           </td>
 
           <td style="width:200px"></td>
-          <td>118,000</td>
-          <td>1,454</td>
-          <td>572.17 元</td>
-          <td>4.85 元</td>
-          <td>1.23%</td>
+          <td>1,296,724</td>
+          <td>20,202</td>
+          <td>52,727.22元</td>
+          <td> 2.61元</td>
+          <td>1.56%</td>
         </tr>
-        <tr>
-          <td>2019-12-04</td>
-          <td>
-            <p>快小说阅读器(iOS)</p>
-            <span>ID 1109594869</span>
-          </td>
-
-          <td style="width:200px"></td>
-          <td>118,000</td>
-          <td>1,454</td>
-          <td>572.17 元</td>
-          <td>4.85 元</td>
-          <td>1.23%</td>
-        </tr>
+        
       </tbody>
     </table>
   </div>
@@ -206,6 +215,82 @@ export default {
   name: "Search",
   data() {
     return {};
+  },
+  mounted() {
+    this.drawLine();
+  },
+  methods: {
+    drawLine() {
+      let myChart = echarts.init(document.getElementById("report"));
+      let option = {
+        title: {
+          text: ""
+        },
+        color: ["#3158fc", "#4caf50"],
+        tooltip: {
+          trigger: "axis"
+        },
+        // legend: {
+        //   data: ["邮件营销", "联盟广告"]
+        // },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "7%",
+          top: "3%"
+          // containLabel: true
+        },
+
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["2019/12/01", "2019/12/02", "2019/12/03", "2019/12/04"],
+          axisTick: {
+            show: false
+          }
+        },
+        yAxis: [
+          {
+            show: true,
+            axisLine: { show: false },
+            axisTick: { show: false },
+            splitLine: { show: false },
+            type: "value",
+            splitLine: {
+              show: true,
+
+              lineStyle: {
+                color: "#eeeeee"
+              }
+            },
+            axisLabel: {
+              textStyle: {
+                color: "#3158fc"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            symbol: "none",
+            name: "邮件营销",
+            smooth: true, //这个是把线变成曲线
+            type: "line", //这个是展示数据的类型，是柱状图还是折线图，饼状图
+            stack: "总量",
+            data: [120, 132, 101, 134, 90, 230, 210]
+          },
+          {
+            symbol: "none",
+            name: "联盟广告",
+            smooth: true, //这个是把线变成曲线
+            type: "line", //这个是展示数据的类型，是柱状图还是折线图，饼状图
+            stack: "总量",
+            data: [220, 182, 191, 234, 290, 330, 310]
+          }
+        ]
+      };
+      myChart.setOption(option);
+    }
   }
 };
 </script>
@@ -253,15 +338,48 @@ export default {
   font-weight: 600;
   margin: 15px 0;
   font-size: 16px;
-  color: #000;
+  color: rgba(0, 0, 0, 0.8);
 }
 .rect {
   margin: 0 auto;
-  border: 1px solid #eee;
-  width: 1044px;
-  height: 300px;
+  width: 100%;
+  height: 260px;
 }
+.rectTitle {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.rectTitle > div {
+  padding: 20px;
+  position: relative;
+}
+.rectTitle > div > span {
+  vertical-align: middle;
+}
+.rectTitle > div > i {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #eee;
+  position: absolute;
+  top: 22px;
+  left: -1px;
+  border-radius: 3px;
+  font-weight: 100;
 
+  color: #fff;
+  font-size: 5px;
+}
+.rectTitle > div:nth-of-type(1) > i {
+  background: #5173fa;
+  padding: 1px;
+}
+.rectTitle > div:nth-of-type(2) > i {
+  background: #4caf50;
+  padding: 1px;
+}
 .table-text-id {
   font-size: 12px;
   color: #999;
@@ -271,22 +389,22 @@ export default {
   text-overflow: ellipsis;
 }
 .tt {
-  background: #f5f7f9;
-  border: 1px solid #ccc ;
-  border-top: none;
+  background: #f4f6f8 !important;
+  border: 1px solid rgb(218, 215, 215);
 }
 th {
-  padding: 22px !important;
+  padding: 18px !important;
 }
 td {
-  padding: 22px !important;
+  padding: 20px !important;
 }
 thead {
   border: none !important;
-  background: #f5f7f9 !important;
+  background: #f4f6f8 !important;
 }
+
 tbody tr {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc !important;
   color: rgba(0, 0, 0, 0.8);
   font-weight: 400;
   font-size: 14px;
